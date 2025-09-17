@@ -6,10 +6,10 @@ class QuizService {
         const quizzes = await prisma.quiz.findMany({
             include: { questions: true },
         });
-        return quizzes.map(q => ({
+        return quizzes.map((q) => ({
             id: q.id,
             title: q.title,
-            questionsCount: q.questions.length
+            questionsCount: q.questions.length,
         }));
     }
 
@@ -25,7 +25,7 @@ class QuizService {
             data: {
                 title,
                 questions: {
-                    create: questions.map(q => ({
+                    create: questions.map((q) => ({
                         questionText: q.questionText,
                         type: q.type,
                         options: q.options?.length ? JSON.stringify(q.options) : null,
@@ -33,26 +33,24 @@ class QuizService {
                             ? q.type === 'checkbox'
                                 ? JSON.stringify(q.correctAnswer)
                                 : String(q.correctAnswer)
-                            : null
-                    }))
-                }
+                            : null,
+                    })),
+                },
             },
-            include: { questions: true }
+            include: { questions: true },
         });
     }
 
     async deleteQuiz(id) {
-        // спочатку видаляємо питання
         await prisma.question.deleteMany({
-            where: { quizId: Number(id) }
+            where: { quizId: Number(id) },
         });
 
-        // потім квіз
         const quiz = await prisma.quiz.delete({
             where: { id: Number(id) },
         });
 
-        return quiz ? true : false;
+        return !!quiz;
     }
 }
 
