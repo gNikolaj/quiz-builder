@@ -5,7 +5,7 @@ Users can create custom quizzes, view all available quizzes, and inspect any qui
 
 ---
 
-## 🚀 Tech Stack
+## Tech Stack
 
 - **Frontend**: React, Material-UI (MUI)
 - **Backend**: Node.js, Express
@@ -13,7 +13,7 @@ Users can create custom quizzes, view all available quizzes, and inspect any qui
 
 ---
 
-## 📦 Installation & Setup
+## Installation & Setup
 
 ### 1. Clone the Repository
 ```bash
